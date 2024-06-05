@@ -36,12 +36,46 @@ Node* Search(Node* p, int key){
     return NULL;
 }
 
+Node* RSearch(Node* p, int key){
+    if(p == nullptr){
+        return NULL;
+    }
+    if(key == p->data){
+        return p;
+    }
+    return RSearch(p->next, key);
+}
+
+Node* optimizedSearch(Node* p, int key){
+    Node* q = new Node;
+    while(p){
+        if(p->data == key){
+            q->next = p->next;
+            p->next = head;
+            head = p;
+            return p;
+        }
+        q=p;
+        p=p->next;
+    }
+    return NULL;
+}
+
+void DisplayLinkedList(Node* p){
+    while(p){
+        cout << p->data << "->" << flush;
+        p = p->next;
+    }
+}
 
 int main(){
     int A[] = {3,6,1,7,8,5};
     int n = sizeof(A)/sizeof(A[0]);
 
     createLinkedList(A, n);
-    cout << Search(head, 8) << endl;
+    // cout << RSearch(head, 1) << endl;
+    cout << optimizedSearch(head, 5) << endl;
+    cout << optimizedSearch(head, 1) << endl;
+    DisplayLinkedList(head);
     return 0;
 }
