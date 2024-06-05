@@ -47,7 +47,7 @@ Node* RSearch(Node* p, int key){
 }
 
 Node* optimizedSearch(Node* p, int key){
-    Node* q = new Node;
+    Node* q = nullptr;
     while(p){
         if(p->data == key){
             q->next = p->next;
