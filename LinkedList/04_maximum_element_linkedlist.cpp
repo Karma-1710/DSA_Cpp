@@ -54,7 +54,7 @@ int main(){
     
     createLinkedList(A, n);
     int maximumElement = MaxElement(head);
-    int maximumeElementUsingRecursion = recursiveMax(head);
+    int maximumeElementUsingRecursion = recursiveMax(head); 
     cout << maximumElement << endl; // 51
     cout << maximumeElementUsingRecursion << endl; // 51
     return 0;
