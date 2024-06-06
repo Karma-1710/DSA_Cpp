@@ -1,6 +1,7 @@
 #include<iostream>
+#include<climits>
 using namespace std;
-
+ 
 class Node{
     public:
         int data;
@@ -17,7 +18,6 @@ void createLinkedList(int A[], int n){
     head->data = A[0];
     head->next = nullptr;
     last = head;
-
     for(int i=1; i<n;i++){
         temp = new Node;
         temp->data = A[i];
@@ -33,46 +33,25 @@ void DisplayLinkedList(Node* p){
         p=p->next;
     }
 }
-int count(Node* p) {
-    int count = 0;
-    while (p) {
-        count++;
-        p = p->next;
-    }
-    return count;
-}
 
-int Delete(Node* p,int position){
-    Node* q = nullptr;
-    int x = -1;
-    if(position < 1 || position > count(p)){
-        return -1;
-    }
-    if(position == 1){
-        x = head->data;
-        head = head->next;
-        delete p;
-    }else{
-        for(int i=0; i<position-1 && p;i++){
-            q=p;
-            p=p->next;
+int isSorted(Node* p){
+    int x = INT_MIN;
+    while(p){
+        if(p->data < x){
+            return 0;
         }
-        if(p){
-            x = p->data;
-            q->next = p->next;
-            delete p;
-        }
+        x = p->data;
+        p=p->next;
     }
-    return x;
+    return 1;
+
 }
 
 int main(){
-    int A[] = {3,5,7,9,0,1};
+    int A[] = {3,5,7,9};
     int n = sizeof(A)/sizeof(A[0]);
-
     createLinkedList(A, n);
     // DisplayLinkedList(head);
-    Delete(head,5);
-    DisplayLinkedList(head);
+    cout << isSorted(head) << endl;
     return 0;
 }
