@@ -47,18 +47,16 @@ int Length(Node* p){
 
 int Delete(Node* p, int pos){
     int x = 0;
-    Node* q;
     if(pos<0 || pos>Length(p)){
         return -1;
     }
     if(pos == 1){
-        q = head;
         head= head->next;
-        x = q->data;
-        delete q;
         if(head){
             head->prev = NULL;
         }
+        x = p->data;
+        delete p;
     }else{
         for(int i=0;i<pos-1;i++){
             p=p->next;
@@ -77,7 +75,7 @@ int main(){
     int A[] = {3,5,7,9,1,0};
     int n = sizeof(A)/sizeof(A[0]);
     createDoublyLL(A, n);
-    Delete(head, 3);
+    Delete(head, 1);
     DisplayDoublyLL(head);
     return 0;
 }
