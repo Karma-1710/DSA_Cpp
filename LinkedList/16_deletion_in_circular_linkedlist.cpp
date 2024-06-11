@@ -34,9 +34,21 @@ void DisplayCircularLL(Node* p){
     } while (p!=head);
     
 }
+int Length(Node* p){
+    int count = 0;
+    do
+    {
+        count++;
+        p=p->next;
+    } while (p != head);
+    return count;
+}
 
 int Delete(Node* p, int pos){
     int x = 0;
+    if(pos<0 || pos>Length(p)){
+        return -1;
+    }
     if(pos == 1){
         while(p->next != head){
             p=p->next;
