@@ -10,7 +10,7 @@ class Array{
         Array(int size);
         void Create();
         void Display();
-        void Insert(int index, int x);
+        int Delete(int index);
 };
 
 Array::Array(int size){
@@ -22,34 +22,35 @@ void Array::Create(){
     cout << "Enter the number of elements: " << endl;
     cin >> length;
 
-    cout << "Enter the elements inside of an Array: " << endl;
+    cout << "Enter the elements inside an Array: " << endl;
     for(int i=0;i<length;i++){
-        cout << "Array element: " << i << endl;
+        cout << "Array Element " << i << endl;
         cin >> A[i];
     }
 };
 
 void Array::Display(){
-    for(int i=0; i<length; i++){
-        cout << A[i] << " " << flush;
+    for(int i = 0;i<length;i++){
+        cout << A[i] << " " <<  flush;
     }
 };
 
-void Array::Insert(int index, int x){
-    if(index >= 0 &&  index<=length){
-        for(int i=length;i>index;i--){
-            A[i] = A[i-1];
+int Array::Delete(int index){
+    int x = A[index];
+    if(index>=0 && index<=length){
+        for(int i=index; i<length-1;i++){
+            A[i] = A[i+1];
         }
-        A[index] = x;
-        length++;
-    } 
+        length--;
+    }
+    return x;
 };
 
 int main(){
     Array arr(10);
     arr.Create();
     arr.Display();
-    arr.Insert(4, 15);
+    arr.Delete(3);
     cout << endl;
     arr.Display();
     return 0;
