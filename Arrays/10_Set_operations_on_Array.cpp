@@ -13,6 +13,7 @@ class Array{
         Array Merge(Array& arr2);
         Array Union(Array& arr2);
         Array Intersection(Array& arr2);
+        Array Difference(Array& arr2);
 };
 
 Array::Array(int size){
@@ -102,7 +103,47 @@ Array Array::Union(Array& arr2){
     return arr3;
 }
 
+Array Array::Intersection(Array& arr2){
+    int i=0,j=0,k=0;
+    Array arr3(size);
 
+    while(i < length && j < arr2.length){
+        if(A[i] < arr2.A[j]){
+            i++;
+        } else if(A[i] > arr2.A[j]){
+            j++;
+        } else{
+            arr3.A[k] = A[i];
+            i++;
+            j++;
+            k++;
+        }
+    }
+
+    arr3.length = k;
+    return arr3;
+}
+
+Array Array::Difference(Array& arr2){
+    int i=0,j=0,k=0;
+    Array arr3(size);
+
+    while(i < length && j < arr2.length){
+        if(A[i] < arr2.A[j]){
+            arr3.A[k] = A[i];
+            i++;
+            k++;
+        } else if(A[i] > arr2.A[j]){
+            j++;
+        } else {
+            i++;
+            j++;
+        }
+    }
+
+    arr3.length = k;
+    return arr3;
+}
 
 int main(){
     Array arr1(10);
@@ -113,7 +154,11 @@ int main(){
     cout << endl;
     arr2.Display();
     cout << endl;
-    Array arr3 = arr1.Union(arr2);
+    // Array arr3 = arr1.Union(arr2);
+    // arr3.Display();
+    // Array arr3 = arr1.Intersection(arr2);
+    // arr3.Display();
+    Array arr3 = arr1.Difference(arr2);
     arr3.Display();
     cout << endl;
 }
