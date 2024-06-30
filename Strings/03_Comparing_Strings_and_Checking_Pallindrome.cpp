@@ -1,7 +1,7 @@
 #include<iostream>
 using namespace std;
 
-int CheckPallindrome(char* C){
+int CheckPallindrome(char C[]){
     int i=0, j=0;
     for(j=0;C[j] != '\0';j++){};
     j = j-1;
