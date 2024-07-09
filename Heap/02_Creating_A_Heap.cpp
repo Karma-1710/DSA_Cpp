@@ -56,6 +56,6 @@ int main(){
 
     cout << "Inplace Insert: " << endl;
     createHeap(b, sizeof(b)/sizeof(b[0]));
-    Print(b, sizeof(b)/sizeof(b[0]), 'b');
+    Print(b, sizeof(b)/sizeof(b[0]), 'b')
     return 0;
 }
