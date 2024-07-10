@@ -182,14 +182,14 @@ void AVL::Inorder(Node *p) {
 }
 
 Node* AVL::InPre(Node* p){
-    if(p && p->rchild !=nullptr){
+    while(p && p->rchild !=nullptr){
         p=p->rchild;
     }
     return p;
 }
 
 Node* AVL::InSuc(Node* p){
-    if(p && p->lchild != nullptr){
+    while(p && p->lchild != nullptr){
         p = p->lchild;
     }
     return p;
