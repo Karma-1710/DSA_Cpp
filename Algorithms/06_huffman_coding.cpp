@@ -1,16 +1,16 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-class MinHeapNode{
+class Node{
     public:
         char data;
         unsigned freq;
-        MinHeapNode *left;
-        MinHeapNode *right;
-        MinHeapNode(char data, unsigned freq);       
+        Node* left;
+        Node* right;
+        Node(char data, unsigned freq);
 };
 
-MinHeapNode::MinHeapNode(char data, unsigned freq){
+Node::Node(char data, unsigned freq){
     left = right = nullptr;
     this->data = data;
     this->freq = freq;
@@ -18,29 +18,29 @@ MinHeapNode::MinHeapNode(char data, unsigned freq){
 
 class compare{
     public:
-        bool operator()(MinHeapNode* l, MinHeapNode* r){
+        bool operator()(Node* l, Node* r){
             return l->freq > r->freq;
         }
 };
 
-void printCodes(MinHeapNode* root, string str){
+void printCodes(Node* root, string str){
+    // handling edge cases
     if(!root){
         return;
     }
     if(root->data != '$'){
-        cout << root->data << ':' << str << "\n";
+        cout << root->data << ": " << str << endl;
     }
-
     printCodes(root->left, str+"0");
     printCodes(root->right, str+"1");
 }
 
-void Huffmancode(char data[], int freq[], int size){
-    MinHeapNode* left, *right, *top;
-    priority_queue<MinHeapNode*, vector<MinHeapNode*>, compare> minHeap;
+void HuffmanCoding(char data[], int freq[], int size){
+    Node *left, *right, *top;
+    priority_queue<Node*, vector<Node*>, compare> minHeap;
 
-    for(int i=0; i< size;i++){
-        minHeap.push(new MinHeapNode(data[i], freq[i]));
+    for(int i=0; i<size;i++){
+        minHeap.push(new Node(data[i], freq[i]));
     }
 
     while(minHeap.size() != 1){
@@ -50,15 +50,15 @@ void Huffmancode(char data[], int freq[], int size){
         right = minHeap.top();
         minHeap.pop();
 
-        top = new MinHeapNode('$', left->freq + right->freq);
+        top = new Node('$', left->freq + right->freq);
         top->left = left;
         top->right = right;
 
         minHeap.push(top);
-    };
+    }
 
     printCodes(minHeap.top(), "");
-}
+};
 
 int main(){
     char arr[] = { 'a', 'b', 'c', 'd', 'e', 'f' }; 
@@ -66,6 +66,7 @@ int main(){
   
     int size = sizeof(arr) / sizeof(arr[0]); 
   
-    Huffmancode(arr, freq, size);
+    HuffmanCoding(arr, freq, size); 
+  
     return 0;
 }
