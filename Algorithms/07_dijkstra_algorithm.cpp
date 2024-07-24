@@ -1,15 +1,14 @@
 #include<bits/stdc++.h>
-#include<limits.h>
 #include<climits>
 using namespace std;
-
 #define V 9
-// if it is not yet included in the sptSet and is the minimum among the available vertices
+
 int minDistance(int dist[], bool sptSet[]){
-    int min = INT_MAX;
+    int min  = INT_MAX;
     int min_index;
-    for(int v = 0; v < V;v++){
-        if(sptSet[v] == false && dist[v] <= min){
+
+    for(int v=0;v<V;v++){
+        if(sptSet[v] == false && dist[v] < min){
             min = dist[v];
             min_index = v;
         }
@@ -26,15 +25,14 @@ void printSolution(int dist[]){
 void dijkstra(int graph[V][V], int src){
     int dist[V];
     bool sptSet[V];
-    
-    // initialize the whole distance array with infinity 
+
     for(int i=0;i<V;i++){
         dist[i] = INT_MAX;
         sptSet[i] = false;
     }
-
     dist[src] = 0;
-    for(int count = 0;count < V-1;count++){
+    
+    for(int count = 0; count < V-1; count++){
         int u = minDistance(dist, sptSet);
         sptSet[u] = true;
 
@@ -44,6 +42,7 @@ void dijkstra(int graph[V][V], int src){
             }
         }
     }
+
     printSolution(dist);
 }
 
@@ -57,7 +56,6 @@ int main(){
                         { 0, 0, 0, 0, 0, 2, 0, 1, 6 },
                         { 8, 11, 0, 0, 0, 0, 1, 0, 7 },
                         { 0, 0, 2, 0, 0, 0, 6, 7, 0 } };
-    
     dijkstra(graph, 0);
     return 0;
 }
