@@ -16,15 +16,8 @@ void Union(int u, int v, int S[]){
 
 int Find(int u, int S[]){
     int x = u;
-    int v = 0;
     while(S[x] > 0){
         x = S[x];
-    }
-
-    while(u != x){
-        v = S[u];
-        S[u] = x;
-        u = v;
     }
 
     return x;
